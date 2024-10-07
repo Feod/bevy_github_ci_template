@@ -17,3 +17,5 @@ opt-level = 3
 
 [dependencies]
 bevy = "0.14"
+rand = "*"
+bevy_rapier2d = "*"
