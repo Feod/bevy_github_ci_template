@@ -78,6 +78,7 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             Collider::cuboid(16.0, 16.0),
             ExternalForce::default(),
             ExternalImpulse::default(),
+            Restitution::coefficient(1.0), // P2aff, P7ed8
         ));
     }
 
@@ -95,18 +96,49 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         Collider::cuboid(16.0, 16.0),
         ExternalForce::default(),
         ExternalImpulse::default(),
+        Restitution::coefficient(1.0), // P2aff, P7ed8
     ));
 
     //Floor:
     commands.spawn((
         Name::new("Floor"),
         SpriteBundle {
-            transform: Transform::from_translation(Vec3::new(0., -100., 0.)),
+            transform: Transform::from_translation(Vec3::new(0., -300., 0.)),
             texture: asset_server.load("ducky.png"),
             ..Default::default()
         },
         RigidBody::Fixed,
-        Collider::cuboid(400.0, 16.0),
+        Collider::cuboid(800.0, 16.0),
+    ));
+    commands.spawn((
+        Name::new("Wall1"),
+        SpriteBundle {
+            transform: Transform::from_translation(Vec3::new(-600., 0., 0.)),
+            texture: asset_server.load("ducky.png"),
+            ..Default::default()
+        },
+        RigidBody::Fixed,
+        Collider::cuboid(16.0, 400.0),
+    ));
+    commands.spawn((
+        Name::new("Wall2"),
+        SpriteBundle {
+            transform: Transform::from_translation(Vec3::new(600., 0., 0.)),
+            texture: asset_server.load("ducky.png"),
+            ..Default::default()
+        },
+        RigidBody::Fixed,
+        Collider::cuboid(16.0, 400.0),
+    ));
+    commands.spawn((
+        Name::new("Wall3"),
+        SpriteBundle {
+            transform: Transform::from_translation(Vec3::new(0., 300., 0.)),
+            texture: asset_server.load("ducky.png"),
+            ..Default::default()
+        },
+        RigidBody::Fixed,
+        Collider::cuboid(800.0, 16.0),
     ));
 }
 
